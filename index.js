@@ -1,11 +1,18 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder, PermissionsBitField } = require('discord.js');
 const http = require('http');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 
 const CHANNEL_ID = '691426509583417406';
 const FRASES = ['<:ComemeEsta:885603967898378271>'];
 const INTERVALO_MS = 5 * 60 * 60 * 1000; // 5 horas
+const PREFIX = '!anuncio';
 
 client.once('ready', () => {
   console.log(`Serrucho conectado como ${client.user.tag}`);
@@ -25,6 +32,30 @@ async function enviarFrase() {
     console.error('Error enviando mensaje:', err);
   }
 }
+
+client.on('messageCreate', async (message) => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(PREFIX)) return;
+
+  // Solo gente con permiso de "Gestionar mensajes" puede usarlo
+  if (!message.member?.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
+    return message.reply('No tenés permiso para usar este comando.');
+  }
+
+  const texto = message.content.slice(PREFIX.length).trim();
+  if (!texto) {
+    return message.reply('Escribí algo después de `!anuncio`, ej: `!anuncio Hoy hay evento a las 20hs`');
+  }
+
+  const embed = new EmbedBuilder()
+    .setColor(0x2b2d31)
+    .setDescription(texto)
+    .setFooter({ text: `Enviado por ${message.author.username}` })
+    .setTimestamp();
+
+  await message.channel.send({ embeds: [embed] });
+  await message.delete().catch(() => {});
+});
 
 client.login(process.env.DISCORD_TOKEN);
 
