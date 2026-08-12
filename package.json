@@ -1,0 +1,12 @@
+{
+  "name": "serrucho-bot",
+  "version": "1.0.0",
+  "description": "Bot que dice frases random cada 5 horas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
