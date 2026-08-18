@@ -11,7 +11,7 @@ const client = new Client({
 
 const CHANNEL_ID = '691426509583417406';
 const FRASES = ['<:ComemeEsta:885603967898378271>'];
-const INTERVALO_MS = 5 * 60 * 60 * 1000; // 5 horas
+const INTERVALO_MS = 30 * 60 * 1000; // 30 minutos (prueba)
 const PREFIX = '!anuncio';
 
 client.once('ready', () => {
@@ -48,13 +48,16 @@ client.on('messageCreate', async (message) => {
   }
 
   const embed = new EmbedBuilder()
-    .setColor(0x2b2d31)
-    .setDescription(texto)
-    .setFooter({ text: `Enviado por ${message.author.username}` })
-    .setTimestamp();
+    .setColor(0x5865f2)
+    .setDescription(texto);
 
   await message.channel.send({ embeds: [embed] });
-  await message.delete().catch(() => {});
+
+  try {
+    await message.delete();
+  } catch (err) {
+    console.error('No se pudo borrar el mensaje del comando:', err.message);
+  }
 });
 
 client.login(process.env.DISCORD_TOKEN);
