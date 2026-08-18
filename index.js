@@ -9,9 +9,23 @@ const client = new Client({
   ],
 });
 
-const CHANNEL_ID = '691426509583417406';
-const FRASES = ['<:ComemeEsta:885603967898378271>'];
-const INTERVALO_MS = 30 * 60 * 1000; // 30 minutos (prueba)
+const CHANNEL_ID = '1521096118488797215';
+const FRASES = [
+  '<@1024012772952002602> chambea <:Catnice:1519445727980556498>',
+  '<@665445384642101249> <:paglorya:1519801713404547235>',
+  '<@665445384642101249> chambea <:Catnice:1519445727980556498>',
+  '<@751628419258777600> chambea <:Catnice:1519445727980556498>',
+  'Todo es culpa de Mat',
+  'Ban a la furra de Brazzers',
+  'Ban al femboy de Glorya',
+  'Ban al peruano de Mat',
+  'Hoy live de pocket?',
+  'Hoy sale sorteito?',
+  'Hoy abriré cuentas',
+  'Brazzers chupala',
+  'Apenas me salieron 69 oaks <:sadvibes:1519317106993270846>',
+];
+const INTERVALO_MS = 5 * 60 * 60 * 1000; // 5 horas
 const PREFIX = '!anuncio';
 
 client.once('ready', () => {
