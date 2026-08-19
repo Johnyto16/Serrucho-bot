@@ -19,7 +19,7 @@ const FRASES = [
   'Ban a la furra de Brazzers',
   'Ban al femboy de Glorya',
   'Ban al peruano de Mat',
-  'Hoy live de pocket?',
+  'Hoy sale live de pocket?',
   'Hoy sale sorteito?',
   'Hoy abriré cuentas',
   'Brazzers chupala',
